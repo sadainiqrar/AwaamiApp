@@ -4,11 +4,14 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
+
+import { LoginPage } from '../pages/Login/login';
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = HomePage;
+  rootPage: any = HomePage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
@@ -19,4 +22,13 @@ export class MyApp {
     });
   }
 }
+
+export class User {
+  uid: string;
+  fullname: string;
+  photourl: string;
+  username: string;
+}
+
+export const DATA_API_ENDPOINT = 'http://192.168.100.14:3208/';
 
