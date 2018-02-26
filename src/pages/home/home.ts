@@ -4,6 +4,9 @@ import { NavController } from 'ionic-angular';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { LoginPage } from '../Login/login';
 import { NativeStorage } from '@ionic-native/native-storage';
+import { ViewChild } from '@angular/core';
+import { Slides } from 'ionic-angular';
+
 
 import { User } from '../../app/app.component';
 @Component({
@@ -11,8 +14,10 @@ import { User } from '../../app/app.component';
   templateUrl: 'home.html'
 })
 export class HomePage {
+  @ViewChild(Slides) slides: Slides;
   FB_APP_ID: number = 141614143143756;
   currentUser: User;
+ 
   constructor(public navCtrl: NavController, private fb: Facebook, private nativeStorage: NativeStorage) {
     this.fb.browserInit(this.FB_APP_ID, "v2.8");
     let env = this;
@@ -54,5 +59,10 @@ export class HomePage {
         nav.push(LoginPage);
       });
   }
+
+  goToSlide() {
+    this.slides.slideTo(2, 500);
+  }
+
 
 }

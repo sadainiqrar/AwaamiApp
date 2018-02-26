@@ -1,11 +1,33 @@
 <ion-header>
   <ion-navbar hideBackButton="true">
-    <ion-title>
-      Awaami App
+    <button ion-button menuToggle >
+      <ion-icon name="menu" class="text-color"></ion-icon>
+    </button>
+   
+    <ion-title class="text-color">
+      Overview
     </ion-title>
+    
+
+
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+  <ion-slides style="max-height:100px">
+    <ion-slide>
+      <h1>Slide 1</h1>
+    </ion-slide>
+    <ion-slide>
+      <h1>Slide 2</h1>
+    </ion-slide>
+    <ion-slide>
+      <h1>Slide 3</h1>
+    </ion-slide>
+  </ion-slides>
+
+
+  <hr />
+
   <h2 >{{ currentUser?.fullname }}</h2>
 </ion-content>

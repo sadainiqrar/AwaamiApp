@@ -24,7 +24,6 @@ $app-direction: ltr;
 
 
 
-
 // Named Color Variables
 // --------------------------------------------------
 // Named colors makes it easy to reuse colors on various components.
@@ -38,8 +37,11 @@ $colors: (
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222
+  dark:       #222,
+  contrast: 	#fefb00
 );
+
+
 
 
 // App iOS Variables
@@ -55,10 +57,10 @@ $colors: (
 
 
 
-
 // App Windows Variables
 // --------------------------------------------------
 // Windows only Sass variables can go here
+
 
 
 
@@ -86,3 +88,27 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+
+
+ion-header{
+	background-image: url('../assets/imgs/head.png') !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    ion-navbar{
+	background: transparent;
+        div.toolbar-background{
+              background: transparent;
+        }
+		toolbar{
+			padding: 0px;
+			}
+    }
+}
+
+.text-color{
+  color: color($colors, contrast);
+	div{
+		color: color($colors, contrast);
+	}
+}
+

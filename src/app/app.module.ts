@@ -8,6 +8,7 @@ import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 
+import { MenuPage } from '../pages/navpage/menu';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { LoginPage } from '../pages/Login/login';
 
@@ -15,7 +16,8 @@ import { LoginPage } from '../pages/Login/login';
   declarations: [
     MyApp,
     HomePage,
-    LoginPage
+    LoginPage,
+    MenuPage
   ],
   imports: [
     BrowserModule,
@@ -28,7 +30,8 @@ import { LoginPage } from '../pages/Login/login';
   entryComponents: [
     MyApp,
     LoginPage,
-    HomePage
+    HomePage,
+    MenuPage
   ],
   providers: [
     StatusBar,
