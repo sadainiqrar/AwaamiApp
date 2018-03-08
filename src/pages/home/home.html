@@ -1,33 +1,94 @@
 <ion-header>
   <ion-navbar hideBackButton="true">
-    <button ion-button menuToggle >
+    <button ion-button menuToggle>
       <ion-icon name="menu" class="text-color"></ion-icon>
     </button>
-   
+
     <ion-title class="text-color">
       Overview
     </ion-title>
-    
 
 
   </ion-navbar>
 </ion-header>
-
-<ion-content padding>
-  <ion-slides style="max-height:100px">
+<ion-content>
+  <ion-slides style="max-height:100px" class="background-content">
     <ion-slide>
-      <h1>Slide 1</h1>
+      <h1 class="primary-heading">{{earnedToday | currency:'PKR':'code'}}</h1>
+      <p class="subheading">Earned Today</p>
     </ion-slide>
     <ion-slide>
-      <h1>Slide 2</h1>
+      <h1 class="primary-heading">{{earnedMonth | currency:'PKR':'code'}}</h1>
+      <p class="subheading">Earned This Month</p>
     </ion-slide>
     <ion-slide>
-      <h1>Slide 3</h1>
+      <h1 class="primary-heading">{{monthlytraffic}}</h1>
+      <p class="subheading">This Month's Traffic</p>
     </ion-slide>
   </ion-slides>
 
+  <ion-content padding class="background">
 
-  <hr />
+    <ion-content>
 
-  <h2 >{{ currentUser?.fullname }}</h2>
+      <div>
+        <ion-segment [(ngModel)]="_sub_category">
+          <ion-segment-button *ngFor="let filter of filters" value={{filter.value}}>
+            {{filter.id}}
+          </ion-segment-button>
+        </ion-segment>
+        </div>
+
+        
+      <div class="cards-bg">
+
+        <!-- <h2>{{ currentUser?.fullname }}</h2>-->
+
+        <ion-card *ngFor="let article of articles | categoryFilter: _sub_category">
+
+          <img [src]="article.photo_url" />
+
+          <ion-card-content>
+            <p>
+              {{article.modified_date | date}}
+            </p>
+            <ion-card-title>
+              {{article.title}}
+            </ion-card-title>
+
+          </ion-card-content>
+
+          <hr />
+          <ion-row no-padding>
+            <ion-col>
+              <ion-row>
+                <p>
+                  {{article.site_name}}
+                </p>
+              </ion-row>
+            </ion-col>
+            <ion-col text-center>
+              <ion-row no-padding>
+                <ion-col no-padding>
+                  <button ion-button clear small color="danger" class="article-btns" icon-start>
+                    <ion-icon name='musical-notes'></ion-icon>
+                    
+                  </button>
+                </ion-col>
+                <ion-col text-right no-padding>
+                  <button ion-button clear small color="danger" class="article-btns" icon-start (click)='share(article.a_id)'>
+                    <ion-icon name='share-alt'></ion-icon>
+                    
+                  </button>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+          
+
+        </ion-card>
+      </div>
+    </ion-content>
+  </ion-content>
 </ion-content>
+

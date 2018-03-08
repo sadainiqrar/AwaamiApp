@@ -7,17 +7,27 @@ import { Facebook } from '@ionic-native/facebook';
 import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { Sources } from '../pages/sources/sources';
+
+import { ModalContentPage } from '../pages/sources/sourceModal';
+
+import { SharingModal } from '../pages/sources/sharingModal';
 
 import { MenuPage } from '../pages/navpage/menu';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { LoginPage } from '../pages/Login/login';
+import { CategoryFilterPipe } from '../filters/articles.filter';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     LoginPage,
-    MenuPage
+    MenuPage,
+    Sources,
+    ModalContentPage,
+    SharingModal,
+    CategoryFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -26,12 +36,18 @@ import { LoginPage } from '../pages/Login/login';
 
     IonicModule.forRoot(MyApp)
   ],
+  exports: [
+    
+  ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     LoginPage,
     HomePage,
-    MenuPage
+    MenuPage,
+    Sources,
+    ModalContentPage,
+    SharingModal
   ],
   providers: [
     StatusBar,

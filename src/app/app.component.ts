@@ -4,6 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
+import { Sources } from '../pages/sources/sources';
 
 import { LoginPage } from '../pages/Login/login';
 
@@ -27,7 +28,12 @@ export class MyApp {
     });
 
     this.pages = [
-      { title: 'Home', component: HomePage }
+      {
+        title: 'Home', component: HomePage
+      },
+      {
+        title: 'Marketing Sources', component: Sources
+      }
     ];
   }
 
@@ -39,12 +45,5 @@ export class MyApp {
   
 }
 
-export class User {
-  uid: string;
-  fullname: string;
-  photourl: string;
-  username: string;
-}
 
-export const DATA_API_ENDPOINT = 'http://192.168.100.14:3208/';
 

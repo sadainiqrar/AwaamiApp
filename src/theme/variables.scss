@@ -33,7 +33,7 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #488aff,
+  primary:    #da454d,
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
@@ -104,11 +104,33 @@ ion-header{
 			}
     }
 }
-
+.background{
+background-color: #f8f8f8 !important;
+overflow: none;
+}
+.background-content{
+background-color: #ffffff;
+}
 .text-color{
   color: color($colors, contrast);
 	div{
 		color: color($colors, contrast);
 	}
+}
+.primary-heading
+{
+	color: color($colors, primary, base);
+	margin-bottom: 0px;
+}
+.subheading
+{
+	padding: 0px;
+    margin: 0px;
+    font-size: 10pt;
+    color: #999;
+}
+.article-btns
+{
+	margin: 0px !important;
 }
 
