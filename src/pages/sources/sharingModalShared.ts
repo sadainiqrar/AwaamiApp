@@ -12,10 +12,10 @@ import { Sources } from '../../pages/sources/sources';
 import { User, Source, Article } from '../../Models/models';
 @Component({
   selector: 'modal-sources',
-  templateUrl: 'sharingModal.html',
+  templateUrl: 'sharingModalShared.html',
   providers: [SourcesService, ArticleService]
 })
-export class SharingModal  {
+export class SharingModalShared  {
   FB_APP_ID: number = 141614143143756;
   currentUser: User;
   sources: Array<Source> = new Array<Source>();
@@ -70,7 +70,7 @@ export class SharingModal  {
               duration: 3000,
               position: 'bottom'
             }).present();
-            env.articleService.insertSharedArticles(env.currentUser.uid, env.article.serial_no)
+            env.articleService.updateSharedArticles(env.currentUser.uid, env.article.serial_no, env.article.copied)
               .subscribe(res => {
 
                 loader.dismiss();

@@ -119,7 +119,7 @@ background-color: #ffffff;
 }
 .primary-heading
 {
-	color: color($colors, primary, base);
+	color: color($colors, primary, base) !important;
 	margin-bottom: 0px;
 }
 .subheading

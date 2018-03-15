@@ -8,10 +8,13 @@ import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { Sources } from '../pages/sources/sources';
-
+import { Clipboard } from '@ionic-native/clipboard';
 import { ModalContentPage } from '../pages/sources/sourceModal';
 
+import { SharingModalShared } from '../pages/sources/sharingModalShared';
 import { SharingModal } from '../pages/sources/sharingModal';
+
+import { SharedPage } from '../pages/article/shared';
 
 import { MenuPage } from '../pages/navpage/menu';
 import { NativeStorage } from '@ionic-native/native-storage';
@@ -25,8 +28,10 @@ import { CategoryFilterPipe } from '../filters/articles.filter';
     LoginPage,
     MenuPage,
     Sources,
+    SharedPage,
     ModalContentPage,
     SharingModal,
+    SharingModalShared,
     CategoryFilterPipe
   ],
   imports: [
@@ -46,14 +51,17 @@ import { CategoryFilterPipe } from '../filters/articles.filter';
     HomePage,
     MenuPage,
     Sources,
+    SharedPage,
     ModalContentPage,
-    SharingModal
+    SharingModal,
+    SharingModalShared
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Facebook,
     NativeStorage,
+    Clipboard,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -70,13 +70,13 @@
             <ion-col text-center>
               <ion-row no-padding>
                 <ion-col no-padding>
-                  <button ion-button clear small color="danger" class="article-btns" icon-start>
+                  <button ion-button clear small color="danger" class="article-btns" icon-start (click)='copy(article.serial_no)'>
                     <ion-icon name='musical-notes'></ion-icon>
                     
                   </button>
                 </ion-col>
                 <ion-col text-right no-padding>
-                  <button ion-button clear small color="danger" class="article-btns" icon-start (click)='share(article.a_id)'>
+                  <button ion-button clear small color="danger" class="article-btns" icon-start (click)='share(article.serial_no)'>
                     <ion-icon name='share-alt'></ion-icon>
                     
                   </button>

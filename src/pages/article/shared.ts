@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController, ToastController } from 'ionic-angular';
+import { NavController, ModalController, ToastController, ActionSheetController, Platform } from 'ionic-angular';
 import { Clipboard } from '@ionic-native/clipboard';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { LoginPage } from '../Login/login';
@@ -7,16 +7,16 @@ import { NativeStorage } from '@ionic-native/native-storage';
 import { ViewChild } from '@angular/core';
 import { Slides } from 'ionic-angular';
 import { ArticleService } from '../../services/articles.service';
-import { SharingModal } from '../../pages/sources/sharingModal';
+import { SharingModalShared } from '../../pages/sources/sharingModalShared';
 import { StatsService } from '../../services/stats.service';
 import { SourcesService } from '../../services/sources.service';
 import { User, Article, Source } from '../../Models/models';
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html',
+  templateUrl: 'shared.html',
   providers: [ArticleService, StatsService, SourcesService]
 })
-export class HomePage {
+export class SharedPage {
   @ViewChild(Slides) slides: Slides;
   FB_APP_ID: number = 141614143143756;
   currentUser: User;
@@ -36,8 +36,8 @@ export class HomePage {
   constructor(public navCtrl: NavController,
     public modalCtrl: ModalController,
     private sourcesService: SourcesService,
-    private clipboard: Clipboard,
-    public toastCtrl: ToastController,
+    private clipboard: Clipboard, public platform: Platform,
+    public toastCtrl: ToastController, public actionsheetCtrl: ActionSheetController,
     private fb: Facebook, private nativeStorage: NativeStorage, private articleService: ArticleService, private statsService: StatsService) {
     this.fb.browserInit(this.FB_APP_ID, "v2.8");
     let env = this;
@@ -64,7 +64,7 @@ export class HomePage {
             else if (data.status === 'connected')
             {
               console.log("Load Initializers");
-              env.loadStats(env.currentUser.uid, env.currentUser.username);
+             // env.loadStats(env.currentUser.uid, env.currentUser.username);
               env.loadArticles(env.currentUser.uid, env._sub_category);
               env.loadSources(env.currentUser.uid);
             }
@@ -95,14 +95,56 @@ export class HomePage {
     console.log('share clicked');
     let serial = s;
     let env = this;
-    let index = env.articles.map(x => x.serial_no).indexOf(serial);
+    let index = env.articles.map(x => x.serial_no).indexOf(serial)
     let article = index == -1 ? null : env.articles[index];
-    let modal = this.modalCtrl.create(SharingModal, { "article": article, "sources": env.addedSources, "user": this.currentUser });
+    let modal = this.modalCtrl.create(SharingModalShared, { "article": article, "sources": env.addedSources, "user": this.currentUser });
     modal.onDidDismiss(data => {
       console.log("returned data", data);
-      env.loadArticles(env.currentUser.uid, env._sub_category);
     });
     modal.present();
+  }
+
+
+  openMenu(s) {
+    let env = this;
+    let serial = s;
+    let index = env.articles.map(x => x.serial_no).indexOf(serial)
+
+    let article = index == -1 ? null : env.articles[index];
+    console.log("check here", article);
+    let actionSheet = this.actionsheetCtrl.create({
+      title: 'Action',
+      cssClass: 'action-sheets-basic-page',
+      buttons: [
+        {
+          text: 'Share',
+          role: 'destructive',
+          icon: !this.platform.is('ios') ? 'share' : null,
+          handler: () => {
+            console.log('share clicked');
+            env.share(article.serial_no);
+
+
+
+
+          }
+        },
+        {
+          text: 'Copy',
+          role: 'destructive',
+          icon: !this.platform.is('ios') ? 'copy' : null,
+          handler: () => {
+            console.log('Copy clicked');
+            env.copy(article.serial_no);
+
+
+
+
+          }
+        }
+      ]
+    });
+    actionSheet.present();
   }
 
 
@@ -119,14 +161,13 @@ export class HomePage {
         console.log(res);
 
         env.clipboard.copy(res).then(rs => {
-          env.articleService.insertCopiedArticles(env.currentUser.uid, article.serial_no)
+          env.articleService.updateCopiedArticles(env.currentUser.uid, article.serial_no, article.shared)
             .subscribe(res => {
               env.toastCtrl.create({
                 message: 'Copied To ClipBoard',
                 duration: 3000,
                 position: 'bottom'
               }).present();
-              env.loadArticles(env.currentUser.uid, env._sub_category);
             }, error => {
               env.toastCtrl.create({
                 message: 'Error Copying',
@@ -159,12 +200,26 @@ export class HomePage {
   loadArticles(uid,category)
   {
 
-
+    let env = this;
     console.log("article Loading with: " + uid + category);
-    this.articleService.getArticles(uid, category).subscribe(res => {
+    this.articleService.getSharedArticles(uid, category).subscribe(res => {
       console.log(res);
       this.articles = res;
       console.log(this.articles[0].title);
+
+      for (let article of env.articles) {
+        env.statsService.getArticleStats(article.site_url, article.modified_date, article.url, env.currentUser.username).subscribe(res => {
+          article.views = res.sessions;
+          article.shares = res.earned;
+        }, err => {
+          article.views = "0";
+          article.shares = 0;
+        }
+        );
+      }
+
+
+
     });
   }
   loadStats(uid,username)
