@@ -40,5 +40,5 @@ export class User {
   username: string;
 }
 
-export const DATA_API_ENDPOINT = 'http://192.168.100.12:3208/';
+export const DATA_API_ENDPOINT = 'http://192.168.100.9:3208/';
 

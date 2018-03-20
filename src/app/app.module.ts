@@ -15,12 +15,22 @@ import { SharingModalShared } from '../pages/sources/sharingModalShared';
 import { SharingModal } from '../pages/sources/sharingModal';
 
 import { SharedPage } from '../pages/article/shared';
+import { ArticleStats } from '../pages/article/articlestats';
 
 import { MenuPage } from '../pages/navpage/menu';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { LoginPage } from '../pages/Login/login';
 import { CategoryFilterPipe } from '../filters/articles.filter';
 
+import { FusionChartsModule } from 'angular2-fusioncharts';
+
+// Import FusionCharts library and chart modules
+import * as FusionCharts from 'fusioncharts';
+import * as Charts from 'fusioncharts/fusioncharts.charts';
+import * as FintTheme from 'fusioncharts/themes/fusioncharts.theme.fint';
+
+// Pass the fusioncharts library and chart modules
+FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
 @NgModule({
   declarations: [
     MyApp,
@@ -29,16 +39,18 @@ import { CategoryFilterPipe } from '../filters/articles.filter';
     MenuPage,
     Sources,
     SharedPage,
+    ArticleStats,
     ModalContentPage,
     SharingModal,
     SharingModalShared,
+
     CategoryFilterPipe
   ],
   imports: [
     BrowserModule,
 
     HttpModule,
-
+    FusionChartsModule,
     IonicModule.forRoot(MyApp)
   ],
   exports: [
@@ -52,6 +64,7 @@ import { CategoryFilterPipe } from '../filters/articles.filter';
     MenuPage,
     Sources,
     SharedPage,
+    ArticleStats,
     ModalContentPage,
     SharingModal,
     SharingModalShared

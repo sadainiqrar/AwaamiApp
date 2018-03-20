@@ -25,4 +25,19 @@ export class StatsService {
   }
 
 
+
+  getTrafficGraph(_uid, _site_url, _url, _fromDate, _toDate, _extra) {
+  let data = { uid: _uid, site_url: _site_url, url: _url, fromDate: _fromDate, toDate: _toDate, extra: _extra };
+  return this.http.post(DATA_API_ENDPOINT + 'api/user/graph/traffic', data)
+    .map((res: Response) => res.json());
+  }
+
+  getCountryGraph(_uid, _site_url, _url, _fromDate, _toDate) {
+  let data = { uid: _uid, site_url: _site_url, url: _url, fromDate: _fromDate, toDate: _toDate };
+  return this.http.post(DATA_API_ENDPOINT + 'api/user/graph/country', data)
+    .map((res: Response) => res.json());
+}
+
+
+
 }

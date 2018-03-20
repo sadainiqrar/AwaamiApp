@@ -1,11 +1,11 @@
 <ion-header>
-  <ion-navbar hideBackButton="true">
+  <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu" class="text-color"></ion-icon>
     </button>
 
     <ion-title class="text-color">
-      Shared Articles
+      Article Statistics
     </ion-title>
 
 
@@ -16,22 +16,8 @@
   <ion-content padding class="background">
 
     <ion-content>
-
-
-
-
-
-      <div>
-        <ion-segment [(ngModel)]="_sub_category">
-          <ion-segment-button *ngFor="let filter of filters" value={{filter.value}}>
-            {{filter.id}}
-          </ion-segment-button>
-        </ion-segment>
-      </div>
-
-
       <ion-list>
-        <ion-item *ngFor="let article of articles | categoryFilter: _sub_category" (click)="reRoute(article.serial_no)" (press)='openMenu(article.serial_no)'>
+        <ion-item>
           <ion-thumbnail item-start>
             <img [src]="article.photo_url">
           </ion-thumbnail>
@@ -43,7 +29,7 @@
             </ion-row>
             <ion-row>
               <ion-col col-12>
-                <p >
+                <p>
                   {{article.site_name}}
                 </p>
               </ion-col>
@@ -68,9 +54,35 @@
             </ion-row>
           </ion-grid>
         </ion-item>
-      </ion-list>
 
+        <div>
+          <ion-segment [(ngModel)]="extra">
+            <ion-segment-button *ngFor="let filter of filters" value={{filter.value}}>
+              {{filter.id}}
+            </ion-segment-button>
+          </ion-segment>
+        </div>
+
+
+        <ion-item>
+          <fusioncharts width="100%"
+                        height="250"
+                        type="msarea"
+                        dataFormat="JSON"
+                        [dataSource]="dataSource"></fusioncharts>
+        </ion-item>
+
+
+        <ion-item>
+          <fusioncharts width="100%"
+                        height="250"
+                        type="bar2d"
+                        dataFormat="JSON"
+                        [dataSource]="dataSource2"></fusioncharts>
+        </ion-item>
+      </ion-list>
     </ion-content>
+
   </ion-content>
 </ion-content>
 

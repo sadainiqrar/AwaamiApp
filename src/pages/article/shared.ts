@@ -10,6 +10,8 @@ import { ArticleService } from '../../services/articles.service';
 import { SharingModalShared } from '../../pages/sources/sharingModalShared';
 import { StatsService } from '../../services/stats.service';
 import { SourcesService } from '../../services/sources.service';
+
+import { ArticleStats } from '../article/articlestats';
 import { User, Article, Source } from '../../Models/models';
 @Component({
   selector: 'page-home',
@@ -102,6 +104,19 @@ export class SharedPage {
       console.log("returned data", data);
     });
     modal.present();
+  }
+
+
+  reRoute(s) {
+    console.log('reRoute clicked');
+    let serial = s;
+    let env = this;
+    let index = env.articles.map(x => x.serial_no).indexOf(serial)
+    let article = index == -1 ? null : env.articles[index];
+
+    env.navCtrl.push(ArticleStats, { 'article': article, 'user': env.currentUser });
+
+    
   }
 
 

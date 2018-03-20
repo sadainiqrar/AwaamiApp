@@ -59,7 +59,7 @@ export class SharingModalShared  {
       content: '<div class="custom-spinner-container"><div class="custom-spinner-box"></div></div>'
     });
     loader.present().then(() => {
-    env.sourcesService.shorten(env.article.url, env.currentUser.uid)
+      env.sourcesService.shorten(env.article.url, env.currentUser.username)
       .subscribe(res => {
         console.log(res);
         env.fb.api("/me/feed?access_token=" + source.access_token + "&method=post&link=" + res, params)
