@@ -1,0 +1,121 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu" class="text-color"></ion-icon>
+    </button>
+
+    <ion-title class="text-color">
+      Statistics
+    </ion-title>
+
+
+  </ion-navbar>
+</ion-header>
+<ion-content>
+
+  <ion-slides style="max-height:100px" class="background-content">
+    <ion-slide>
+      <h1 class="primary-heading">{{earnedToday | currency:'PKR':'code'}}</h1>
+      <p class="subheading">Earned Today</p>
+    </ion-slide>
+    <ion-slide>
+      <h1 class="primary-heading">{{earnedMonth | currency:'PKR':'code'}}</h1>
+      <p class="subheading">Earned This Month</p>
+    </ion-slide>
+    <ion-slide>
+      <h1 class="primary-heading">{{monthlytraffic}}</h1>
+      <p class="subheading">This Month's Traffic</p>
+    </ion-slide>
+  </ion-slides>
+  <ion-content padding class="background">
+
+    <ion-content>
+      <section>
+        <ion-item>
+          <ion-label>From</ion-label>
+          <ion-datetime displayFormat="DD-MM-YYYY" pickerFormat="DD-MM-YYYY" placeholder={{fromString}} [(ngModel)]="fromString" (ngModelChange)="update()"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label>To</ion-label>
+          <ion-datetime displayFormat="DD-MM-YYYY" pickerFormat="DD-MM-YYYY" placeholder={{toString}} [(ngModel)]="toString" (ngModelChange)="update()"></ion-datetime>
+        </ion-item>
+      </section>
+      <hr />
+
+      <section>
+
+        <ion-list>
+
+
+          <ion-item>
+
+            <ion-grid>
+              <ion-row>
+                <ion-col col-3 text-left>
+                  <h2>Date</h2>
+                </ion-col>
+                <ion-col col-4 text-right>
+                  <h2>
+                    Traffic
+                  </h2>
+                </ion-col>
+                <ion-col col-5 text-right>
+                  <h2>
+                    Earning
+                  </h2>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+
+          <ion-item (tap)="reRoute([{'country':'Pakistan','sessions':50,'newSessions':20}])">
+
+            <ion-grid>
+              <ion-row>
+                <ion-col col-3 text-left>
+                  <p class="small-text">11/11/2018</p>
+                </ion-col>
+                <ion-col col-4 text-right>
+                  <p class="small-text">
+                    1200
+                  </p>
+                </ion-col>
+                <ion-col col-5 text-right>
+                  <p class="small-text">
+                    1300
+                  </p>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+
+          <ion-item *ngFor="let stats of userStats" (tap)="reRoute(stats.country_stats)">
+
+            <ion-grid>
+              <ion-row>
+                <ion-col col-3 text-left>
+                  <p class="small-text">{{stats.date | date:"fullDate"}}</p>
+                </ion-col>
+                <ion-col col-4 text-right>
+                  <p class="small-text">
+                    {{stats.total_traffic}}
+                  </p>
+                </ion-col>
+                <ion-col col-5 text-right>
+                  <p class="small-text">
+                    {{stats.total_earning | currency :"PKR"}}
+                  </p>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+
+          
+
+        </ion-list>
+      </section>
+    </ion-content>
+
+  </ion-content>
+</ion-content>
+

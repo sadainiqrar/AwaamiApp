@@ -17,6 +17,10 @@ import { SharingModal } from '../pages/sources/sharingModal';
 import { SharedPage } from '../pages/article/shared';
 import { ArticleStats } from '../pages/article/articlestats';
 
+import { StatsPage } from '../pages/stats/stats';
+
+import { CountryStats } from '../pages/stats/countrystats';
+
 import { MenuPage } from '../pages/navpage/menu';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { LoginPage } from '../pages/Login/login';
@@ -36,10 +40,12 @@ FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
     MyApp,
     HomePage,
     LoginPage,
+    StatsPage,
     MenuPage,
     Sources,
     SharedPage,
     ArticleStats,
+    CountryStats,
     ModalContentPage,
     SharingModal,
     SharingModalShared,
@@ -63,8 +69,10 @@ FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
     HomePage,
     MenuPage,
     Sources,
+    StatsPage,
     SharedPage,
     ArticleStats,
+    CountryStats,
     ModalContentPage,
     SharingModal,
     SharingModalShared

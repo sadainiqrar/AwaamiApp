@@ -40,5 +40,11 @@ export class User {
   username: string;
 }
 
-export const DATA_API_ENDPOINT = 'http://192.168.100.9:3208/';
+export class C_Stats {
+  country: string;
+  sessions: number;
+  newSessions: number;
+}
+
+export const DATA_API_ENDPOINT = 'http://192.168.100.17:3208/';
 

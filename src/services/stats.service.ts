@@ -36,6 +36,21 @@ export class StatsService {
   let data = { uid: _uid, site_url: _site_url, url: _url, fromDate: _fromDate, toDate: _toDate };
   return this.http.post(DATA_API_ENDPOINT + 'api/user/graph/country', data)
     .map((res: Response) => res.json());
+  }
+
+
+  get_statistics(_uid, _from, _to, _extra) {
+  let fromYear = _from.toISOString();
+
+  let from = fromYear.split('T');
+  let f = from[0];
+  let toDate = _to.toISOString();
+  let to = toDate.split('T');
+
+  let t = to[0];
+  let data = { uid: _uid, from_date: f, to_date: t, extra: _extra };
+  return this.http.post(DATA_API_ENDPOINT + 'api/user/statistics', data)
+    .map((res: Response) => res.json());
 }
 
 

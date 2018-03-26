@@ -28,6 +28,7 @@ export class HomePage {
   monthlytraffic: number = 0;
   earnedToday: number = 0.0;
   earnedMonth: number = 0.0;
+  
   _category = "Premium";
   _sub_category = "Political";
   filters = [{ "id": "All", "value": "Political" }, { "id": "Entertainment", "value": "Entertainment" }, { "id": "Showbiz", "value":  "Showbiz" },

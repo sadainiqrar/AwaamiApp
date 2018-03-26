@@ -7,6 +7,8 @@ import { SharedPage } from '../pages/article/shared';
 import { HomePage } from '../pages/home/home';
 import { Sources } from '../pages/sources/sources';
 
+import { StatsPage } from '../pages/stats/stats';
+
 import { LoginPage } from '../pages/Login/login';
 
 @Component({
@@ -31,8 +33,12 @@ export class MyApp {
     this.pages = [
       {
         title: 'Home', component: HomePage
-      }, {
+      },
+      {
         title: 'Shared Articles', component: SharedPage
+      },
+      {
+        title: 'Statistics', component: StatsPage
       },
       {
         title: 'Marketing Sources', component: Sources
